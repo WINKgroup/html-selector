@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML selector Demo Page</title>
+</head>
+
+<body>
+    <h1>HTML selector Demo Page</h1>
+    <iframe id="targetIframe" width="400" height="500" scrolling="auto" frameborder="1" src="iframe.html">
+    </iframe>
+</body>
+<script>
+    const iframe = document.getElementById("targetIframe").contentWindow
+    const preSelection = { eventType: 'select', list: ['h1'] };
+    iframe.addEventListener('DOMContentLoaded', () => {
+        iframe.postMessage(preSelection, '*')
+    })
+
+    window.addEventListener('message', function (event) {
+        if (event.data && event.data.eventType === 'htmlSelector') {
+            alert('Data received, check JS console for details')
+            console.log(event.data.list);
+        }
+    });
+</script>
+
+</html>
