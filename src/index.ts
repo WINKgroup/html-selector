@@ -6,6 +6,12 @@ export interface InjectorOptions {
     baseUrl: string
 }
 
+export function setBase($: cheerio.CheerioAPI, baseUrl:string) {
+    if (!$('base').length) {
+        $('head').prepend(`<base href="${ baseUrl }">`);
+    }
+}
+
 export function injector(html:string, inputOptions?:Partial<InjectorOptions>) {
     const $ = cheerio.load(html);
     const options:InjectorOptions = _.defaults(inputOptions, {
@@ -13,9 +19,7 @@ export function injector(html:string, inputOptions?:Partial<InjectorOptions>) {
         callbackUrl: ''
     })
 
-    if (!$('base').length && options.baseUrl) {
-        $('head').prepend(`<base href="${ options.baseUrl }">`);
-    }
+    if (options.baseUrl) setBase($, options.baseUrl)
 
     const code = fs.readFileSync(path.join(__dirname, './script.js'), 'utf8')
     $('head').append(`
@@ -25,7 +29,6 @@ export function injector(html:string, inputOptions?:Partial<InjectorOptions>) {
             .htmlSelectorCurrent { border: 3px solid red !important;}
         </style>
     `)
-
 
     return $.html()
 }
