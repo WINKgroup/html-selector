@@ -1,6 +1,6 @@
 {
   "name": "@winkgroup/html-selector",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NodeJS library to select HTML code inside an arbitrary HTML page",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
