@@ -8,16 +8,12 @@
 
 <body>
     <h1>HTML selector Demo Page</h1>
-    <iframe id="targetIframe" width="400" height="500" scrolling="auto" frameborder="1" src="iframe.html">
+    <iframe id="targetIframe1" width="400" height="500" scrolling="auto" frameborder="1" src="iframe1.html">
+    </iframe>
+    <iframe id="targetIframe2" width="400" height="500" scrolling="auto" frameborder="1" src="iframe2.html">
     </iframe>
 </body>
 <script>
-    const iframe = document.getElementById("targetIframe").contentWindow
-    const preSelection = { eventType: 'select', list: ['h1'] };
-    iframe.addEventListener('DOMContentLoaded', () => {
-        iframe.postMessage(preSelection, '*')
-    })
-
     window.addEventListener('message', function (event) {
         if (event.data && event.data.eventType === 'htmlSelector') {
             alert('Data received, check JS console for details')

@@ -8,8 +8,14 @@ app.get('/', (req: any, res: any) =>
     res.sendFile(path.join(__dirname, './index.html'))
 );
 
-app.get('/iframe.html', async (req: any, res: any) => {
-    const targetHtml = fs.readFileSync(path.join(__dirname, './target.html'), 'utf8')
+app.get('/iframe1.html', async (req: any, res: any) => {
+    const targetHtml = fs.readFileSync(path.join(__dirname, './target1.html'), 'utf8')
+    const html = injector(targetHtml)
+    res.send(html)
+});
+
+app.get('/iframe2.html', async (req: any, res: any) => {
+    const targetHtml = fs.readFileSync(path.join(__dirname, './target2.html'), 'utf8')
     const html = injector(targetHtml)
     res.send(html)
 });
